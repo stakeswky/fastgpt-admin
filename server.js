@@ -1,11 +1,12 @@
-const express = require('express'); 
-const mongoose = require('mongoose'); 
-const cors = require('cors'); 
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+
 const app = express(); 
 app.use(cors()); 
 app.use(express.json());
 
-const mongoURI = 'mongodb://kbgpt:kbgpt@localhost:27017/?authSource=admin&readPreference=primary&ssl=false';
+const mongoURI = '  ';
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB successfully!'))
   .catch((err) => console.log(`Error connecting to MongoDB: ${err}`));
@@ -32,10 +33,16 @@ app.get('/users', async (req, res) => {
     const order = req.query._order === 'DESC' ? -1 : 1;
     const sort = req.query._sort || '_id';
 
-    const users = await User.find()
-      .skip(start)
-      .limit(end - start)
-      .sort({ [sort]: order });
+    const usersRaw = await User.find()
+    .skip(start)
+    .limit(end - start)
+    .sort({ [sort]: order });
+    const users = usersRaw.map((user) => {
+      const obj = user.toObject();
+      obj.id = obj._id;
+      delete obj._id;
+      return obj;
+    });
 
     const totalCount = await User.countDocuments();
 
@@ -86,10 +93,9 @@ app.post('/users', async (req, res) => {
 // 修改用户信息
 app.put('/users/:id', async (req, res) => {
   try {
-    const id = req.params.id;
+    const _id = req.params.id;
 
-    const result = await User.updateOne({ _id: id }, { $set: req.body });
-
+    const result = await User.updateOne({ _id: _id }, { $set: req.body });
     res.json(result);
   } catch (err) {
     console.log(`Error updating user: ${err}`);
@@ -100,11 +106,11 @@ app.put('/users/:id', async (req, res) => {
 // 删除用户
 app.delete('/users/:id', async (req, res) => {
     try {
-    const id = req.params.id;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    const _id = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
     return res.status(400).json({ error: 'Invalid user ID' });
     }
-    const result = await User.deleteOne({ _id: id });
+    const result = await User.deleteOne({ _id: _id });
     res.json(result);
     } catch (err) {
     console.log(`Error deleting user: ${err}`);
