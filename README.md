@@ -15,6 +15,7 @@
 更新功能：node_modules\tushan\client\api\useUpdate.ts,111行，record.id-->record._id
           node_modules\tushan\client\components\edit\EditForm.tsx，45和50行的defaultValues.id-->defaultValues._id
 删除功能：node_modules\tushan\client\api\useDelete.ts，107行的record.id-->record._id
+          node_modules\tushan\client\components\list\actions\DeleteAction.tsx，24行的props.record.id-->props.record._id
 2. UI问题，保留了原汁原味，供各位开发者自行开发
 
 ## 可能会有的功能
