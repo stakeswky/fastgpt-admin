@@ -6,7 +6,7 @@ const app = express();
 app.use(cors()); 
 app.use(express.json());
 
-const mongoURI = '  ';
+const mongoURI = ''; //在这里填入mongodb的连接地址
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB successfully!'))
   .catch((err) => console.log(`Error connecting to MongoDB: ${err}`));
@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
     rate: Number,
   },
   openaiKey: String,
+  avatar: String,
   createTime: Date,
 });
 
