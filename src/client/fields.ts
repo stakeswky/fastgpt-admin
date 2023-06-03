@@ -6,7 +6,7 @@ import {
 } from 'tushan';
 
 export const userFields = [
-  createTextField('_id', { label: 'ID' }),
+  createTextField('id', { label: 'ID' }),
   createTextField('username', { label: 'Username', list: { sort: true } }),
   createTextField('password', { label: 'Password' }),
   createNumberField('balance', { label: 'Balance' }),
