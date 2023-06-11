@@ -7,7 +7,7 @@ const app = express();
 app.use(cors()); 
 app.use(express.json());
 
-const mongoURI = 'mongodb+srv://KBGPT:bxStMUbIhz4s4HcQ@kbgpt.bm60gx5.mongodb.net/?retryWrites=true&w=majority';//在这里填入mongodb的连接地址
+const mongoURI = '';//在这里填入mongodb的连接地址
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB successfully!'))
   .catch((err) => console.log(`Error connecting to MongoDB: ${err}`));
