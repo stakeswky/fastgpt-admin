@@ -5,7 +5,7 @@ import {
   Resource,
   Tushan,
 } from 'tushan';
-import { userFields,payFields,kbFields,ModelFields,SettingFields } from './fields';
+import { userFields,payFields,kbFields,ModelFields } from './fields';
 import {Dashboard} from './Dashboard';
 const dataProvider = jsonServerProvider('http://localhost:3001');
 
@@ -61,16 +61,6 @@ function App() {
           <ListTable
             fields={ModelFields}
             action={{ detail: true }}
-          />
-        }
-      />
-      <Resource
-        name="settings"
-        label="设置"
-        list={
-          <ListTable
-            fields={SettingFields}
-            action={{ detail: true , edit: true }}
           />
         }
       />
